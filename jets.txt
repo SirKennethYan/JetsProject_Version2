@@ -1,0 +1,5 @@
+FighterJet,A-10 Warthog,340,800,10000000
+FighterJet,F-22 Raptor,1500,1864,206000000
+FighterJet,F-14 Tomcat,1544,1841,38000000
+CargoPlane,C-17 Globemaster III,590,2784,340000000
+AttackHelicopter,AH-64 Apache,227,296,140000000
