@@ -29,7 +29,7 @@ public class JetsApp {
 			System.out.println("6: Dogfight!");
 			System.out.println("7: Add a jet to Fleet");
 			System.out.println("8: Remove a jet from Fleet");
-			System.out.println("9: Quit");
+			System.out.println("0: Quit");
 
 			String menuChoice = userInput.nextLine();
 			System.out.println();
@@ -59,7 +59,7 @@ public class JetsApp {
 				case "8":
 					removeJetFromFleet();
 					break;
-				case "9":
+				case "0":
 					System.out.println("Goodbye!");
 					return;
 				default:
@@ -102,4 +102,5 @@ public class JetsApp {
 	private void removeJetFromFleet() {
 		af.removeJetFromFleet(userInput);
 	}
+
 }

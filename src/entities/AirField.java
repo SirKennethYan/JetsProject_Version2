@@ -25,11 +25,23 @@ public class AirField {
 			String line;
 			while ((line = bufIn.readLine()) != null) {
 				String[] splitJetData = line.split(",");
+				if (splitJetData.length != 5) {
+					System.err.println("WARNING: Invalid data format for jet: " + line);
+					continue; // Skip invalid jet data
+				}
 				String type = splitJetData[0];
 				String modelAircraft = splitJetData[1];
-				double speedAircraft = Double.parseDouble(splitJetData[2]);
-				int rangeAircraft = Integer.parseInt(splitJetData[3]);
-				long priceAircraft = Long.parseLong(splitJetData[4]);
+				double speedAircraft;
+				int rangeAircraft;
+				long priceAircraft;
+				try {
+					speedAircraft = Double.parseDouble(splitJetData[2]);
+					rangeAircraft = Integer.parseInt(splitJetData[3]);
+					priceAircraft = Long.parseLong(splitJetData[4]);
+				} catch (NumberFormatException e) {
+					System.out.println("Invalid numeric data format for jet: " + line);
+					continue; // Skip invalid jet data
+				}
 
 				Jet jet;
 				switch (type.toLowerCase()) {
@@ -43,13 +55,14 @@ public class AirField {
 						jet = new AttackHelicopter(modelAircraft, speedAircraft, rangeAircraft, priceAircraft);
 						break;
 					default:
+						System.out.println("Invalid jet type: " + type);
 						continue; // Skip invalid jet types
 				}
 
 				fleetOfJets.add(jet);
 			}
 		} catch (IOException e) {
-			System.err.println(e);
+			System.err.println("Error reading jets file: " + e.getMessage());
 		}
 
 		return fleetOfJets;
@@ -59,24 +72,6 @@ public class AirField {
 		System.out.println("Total Jets: " + fleetOfJets.size());
 		for (Jet jet : fleetOfJets) {
 			System.out.println(jet);
-		}
-	}
-
-	public void loadAllCargo() {
-		for (Jet jet : fleetOfJets) {
-			if (jet instanceof CargoPlane) {
-				((CargoPlane) jet).loadAllCargo();
-			}
-		}
-	}
-
-	public void dogFight() {
-		for (Jet jet : fleetOfJets) {
-			if (jet instanceof FighterJet) {
-				((FighterJet) jet).dogFight();
-			} else if (jet instanceof AttackHelicopter) {
-				((AttackHelicopter) jet).dogFight();
-			}
 		}
 	}
 
@@ -100,7 +95,7 @@ public class AirField {
 		System.out.println("Fastest Jet: " + fastest);
 	}
 
-	public Jet showLongestRange() {
+	public void showLongestRange() {
 		Jet topRangeJet = fleetOfJets.get(0);
 		for (Jet jet : fleetOfJets) {
 			if (jet.getRangeAircraft() > topRangeJet.getRangeAircraft()) {
@@ -108,18 +103,32 @@ public class AirField {
 			}
 		}
 		System.out.println("Jet with Longest Range: " + topRangeJet);
-		return topRangeJet;
+	}
+
+	public void loadAllCargo() {
+		for (Jet jet : fleetOfJets) {
+			if (jet instanceof CargoPlane) {
+				((CargoPlane) jet).loadAllCargo();
+			}
+		}
+	}
+
+	public void dogFight() {
+		for (Jet jet : fleetOfJets) {
+			if (jet instanceof FighterJet) {
+				((FighterJet) jet).dogFight();
+			} else if (jet instanceof AttackHelicopter) {
+				((AttackHelicopter) jet).dogFight();
+			}
+		}
 	}
 
 	public void addJetToFleet(Scanner userInput) {
 		System.out.print("Enter the Jet's model: ");
 		String model = userInput.next();
-		System.out.print("Enter the Jet's speed: ");
-		double speed = userInput.nextDouble();
-		System.out.print("Enter the Jet's range: ");
-		int range = userInput.nextInt();
-		System.out.print("Enter the Jet's price: ");
-		long price = userInput.nextLong();
+		double speed = readDoubleInput(userInput, "Enter the Jet's speed: ");
+		int range = readIntInput(userInput, "Enter the Jet's range: ");
+		long price = readLongInput(userInput, "Enter the Jet's price: ");
 
 		fleetOfJets.add(new JetImpl(model, speed, range, price));
 		System.out.println("Jet added to fleet!");
@@ -141,6 +150,42 @@ public class AirField {
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid input");
+		}
+	}
+
+	private double readDoubleInput(Scanner scanner, String prompt) {
+		while (true) {
+			try {
+				System.out.print(prompt);
+				return scanner.nextDouble();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a valid double value.");
+				scanner.nextLine(); // Clear the input buffer
+			}
+		}
+	}
+
+	private int readIntInput(Scanner scanner, String prompt) {
+		while (true) {
+			try {
+				System.out.print(prompt);
+				return scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a valid integer value.");
+				scanner.nextLine(); // Clear the input buffer
+			}
+		}
+	}
+
+	private long readLongInput(Scanner scanner, String prompt) {
+		while (true) {
+			try {
+				System.out.print(prompt);
+				return scanner.nextLong();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a valid long value.");
+				scanner.nextLine(); // Clear the input buffer
+			}
 		}
 	}
 }
