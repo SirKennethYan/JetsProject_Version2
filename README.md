@@ -1,18 +1,9 @@
-## Getting Started
+# MakeChangeProject_Version2
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# Description
 
-## Folder Structure
+Welcome to the updated version of the 'JetsApp'! ✈️ This enhanced Java application brings a more streamlined and user-friendly experience to managing your fleet of jets. Take control of your airfield with ease by performing operations such as listing the jets, flying them, and accessing information about the fastest jet and the jet with the longest range. Additionally, you can load cargo for cargo jets, engage in exciting dogfights, and add or remove jets from your fleet. We have made several improvements to enhance your interaction with the application. The menu structure has been optimized and the menu prompts are now clearer. Input validation has been implemented to handle invalid user input gracefully. These enhancements make the 'JetsApp' code more readable, robust, and user-friendly. Enjoy a more efficient and enjoyable jet management experience with the refactored 'JetsApp' code.
 
-The workspace contains two folders by default, where:
+# Technologies Used
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+<p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> </p>
