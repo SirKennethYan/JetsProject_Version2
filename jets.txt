@@ -5,4 +5,4 @@ CargoPlane,C-17 Globemaster III,590,2784,340000000
 AttackHelicopter,AH-64 Apache,227,296,140000000
 CargoPlane,C-5 Galaxy,590,6320,268000000
 AttackHelicopter,AH-1 Cobra,171,360,217000000
-AttackHelicopter,AH-1 Cobra,171,360,217000000,*invalid data*
+AsnackHelicopter,AH-420 Blazehawk,420,4200,420000000,*invalid data*

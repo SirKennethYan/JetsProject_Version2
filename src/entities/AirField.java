@@ -11,15 +11,32 @@ import java.util.Scanner;
 public class AirField {
 	private final List<Jet> fleetOfJets = new ArrayList<>();
 
+	/**
+	 * Constructs an AirField object and initializes the fleet of jets by reading
+	 * from a file.
+	 *
+	 * @param fileName The name of the file containing the jet data.
+	 */
 	public AirField() {
 		String fileName = "jets.txt";
 		readJets(fileName);
 	}
 
+	/**
+	 * Retrieves the list of jets in the fleet.
+	 *
+	 * @return The list of jets in the fleet.
+	 */
 	public List<Jet> getFleetOfJets() {
 		return fleetOfJets;
 	}
 
+	/**
+	 * Reads jet data from a file and populates the fleet of jets.
+	 *
+	 * @param fileName The name of the file containing the jet data.
+	 * @return The list of jets read from the file.
+	 */
 	public List<Jet> readJets(String fileName) {
 		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
 			String line;
@@ -68,6 +85,9 @@ public class AirField {
 		return fleetOfJets;
 	}
 
+	/**
+	 * Displays the list of jets in the fleet.
+	 */
 	public void showListOfJets() {
 		System.out.println("Total Jets: " + fleetOfJets.size());
 		for (Jet jet : fleetOfJets) {
@@ -75,16 +95,20 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Flies all the jets in the fleet and displays their flight information.
+	 */
 	public void fly() {
 		for (Jet jet : fleetOfJets) {
 			double time = jet.getRangeAircraft() / jet.getSpeedAircraft();
-			System.out.println("Aircraft Model: " + jet.getModelAircraft() + " Speed: " + jet.getSpeedAircraft()
-					+ " MPH. Range: " + jet.getRangeAircraft() + " Miles.");
-			System.out.println(jet.getModelAircraft() + " will fly for " + Math.round(time) + " hours.");
-			System.out.println();
+			System.out.println(jet.getModelAircraft() + " is flying at a speed of " + jet.getSpeedAircraft()
+					+ " MPH and will fly for " + Math.round(time) + " hours.");
 		}
 	}
 
+	/**
+	 * Displays the fastest jet in the fleet.
+	 */
 	public void showFastestJet() {
 		Jet fastest = null;
 		for (Jet jet : fleetOfJets) {
@@ -92,9 +116,13 @@ public class AirField {
 				fastest = jet;
 			}
 		}
-		System.out.println("Fastest Jet: " + fastest);
+		System.out.println("Fastest Jet is the " + fastest.getModelAircraft() + ". Speed: "
+				+ fastest.getSpeedAircraft() + " MPH");
 	}
 
+	/**
+	 * Displays the jet with the longest range in the fleet.
+	 */
 	public void showLongestRange() {
 		Jet topRangeJet = fleetOfJets.get(0);
 		for (Jet jet : fleetOfJets) {
@@ -102,9 +130,13 @@ public class AirField {
 				topRangeJet = jet;
 			}
 		}
-		System.out.println("Jet with Longest Range: " + topRangeJet);
+		System.out.println("Aircraft with Longest Range is the " + topRangeJet.getModelAircraft() + " with a range of "
+				+ topRangeJet.getRangeAircraft() + " Miles.");
 	}
 
+	/**
+	 * Loads cargo for all cargo planes in the fleet.
+	 */
 	public void loadAllCargo() {
 		for (Jet jet : fleetOfJets) {
 			if (jet instanceof CargoPlane) {
@@ -113,6 +145,10 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Initiates a dogfight among the fighter jets and attack helicopters in the
+	 * fleet.
+	 */
 	public void dogFight() {
 		for (Jet jet : fleetOfJets) {
 			if (jet instanceof FighterJet) {
@@ -123,6 +159,11 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Prompts the user to add a new jet to the fleet and adds it to the AirField.
+	 *
+	 * @param userInput The Scanner object for reading user input.
+	 */
 	public void addJetToFleet(Scanner userInput) {
 		System.out.print("Enter the Jet's model: ");
 		String model = userInput.next();
@@ -134,6 +175,12 @@ public class AirField {
 		System.out.println("Jet added to fleet!");
 	}
 
+	/**
+	 * Prompts the user to select a jet to remove from the fleet and removes it from
+	 * the AirField.
+	 *
+	 * @param userInput The Scanner object for reading user input.
+	 */
 	public void removeJetFromFleet(Scanner userInput) {
 		for (int i = 0; i < fleetOfJets.size(); i++) {
 			System.out.println(i + 1 + ". " + fleetOfJets.get(i));
@@ -153,6 +200,13 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Reads a double value from the user input.
+	 *
+	 * @param scanner The Scanner object for reading user input.
+	 * @param prompt  The prompt message for the user.
+	 * @return The double value entered by the user.
+	 */
 	private double readDoubleInput(Scanner scanner, String prompt) {
 		while (true) {
 			try {
@@ -165,6 +219,13 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Reads an integer value from the user input.
+	 *
+	 * @param scanner The Scanner object for reading user input.
+	 * @param prompt  The prompt message for the user.
+	 * @return The integer value entered by the user.
+	 */
 	private int readIntInput(Scanner scanner, String prompt) {
 		while (true) {
 			try {
@@ -177,6 +238,13 @@ public class AirField {
 		}
 	}
 
+	/**
+	 * Reads a long value from the user input.
+	 *
+	 * @param scanner The Scanner object for reading user input.
+	 * @param prompt  The prompt message for the user.
+	 * @return The long value entered by the user.
+	 */
 	private long readLongInput(Scanner scanner, String prompt) {
 		while (true) {
 			try {
