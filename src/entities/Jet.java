@@ -1,8 +1,6 @@
 package entities;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public abstract class Jet {
 	private String modelAircraft;
